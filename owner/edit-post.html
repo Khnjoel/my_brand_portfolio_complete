@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.3/tinymce.min.js"
+    integrity="sha512-ykwx/3dGct2v2AKqqaDCHLt1QFVzdcpad7P5LfgpqY8PJCRqAqOeD4Bj63TKnSQy4Yok/6QiCHiSV/kPdxB7AQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <title>Admin Panel</title>
+</head>
+
+<body>
+  <div class="side-menu">
+    <div class="brand-name">
+      <h1>JO KHN</h1>
+    </div>
+    <ul>
+      <li><img src="images/home.png" alt="">&nbsp; <span> <a href="home.html">Home</a> </span> </li>
+      <li><img src="images/message.png" alt="">&nbsp; <span> <a href="messages.html">Inbox</a> </span> </li>
+      <li><img src="images/article.jpg" alt="">&nbsp;<span> <a href="articles.html" class="active">Articles</a> </span>
+      </li>
+      <li><img src="images/skill.jpg" alt="">&nbsp;<span> <a href="skills.html">Skills</a> </span> </li>
+      <li><img src="images/account.jpg" alt="">&nbsp;<span> <a href="account.html">Account</a> </span> </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="header">
+      <div class="nav">
+        <div class="search">
+
+        </div>
+        <div class="user">
+          <div class="notify">
+            <img src="notifications.png" alt="">
+          </div>
+
+          <div class="img-case">
+            <img src="images/logo.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="blog-data">
+        <form id="blogs">
+
+          <h2>ARTICLE</h2>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="fname">Blog Title</label>
+            </div>
+            <div class="col-75" id="title">
+              <input type="text" name="title" id="title" value="" >
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="fname">Short description</label>
+            </div>
+            <div class="col-75" id="subtitle">
+
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-25">
+              <label for="subject">Content</label>
+            </div>
+            <div class="col-75">
+              <section class="mysect">
+                <textarea id="myTextArea" class="mceEditor">
+
+                        </textarea>
+              </section>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <input type="button" class='buttonfx' id="updatebtn" value="Update">
+          </div>
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+
+
+  <script src="../js/tinymce.js"></script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+    import {
+      getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc,
+    } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDCtGxTkR4F0vwIwH72Ts5grruRKsqGZ0U",
+      authDomain: "devkwizera-c1ddd.firebaseapp.com",
+      projectId: "devkwizera-c1ddd",
+      storageBucket: "devkwizera-c1ddd.appspot.com",
+      messagingSenderId: "987293906553",
+      appId: "1:987293906553:web:913e70af4b9aca9a93c6a8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+
+    const db = getFirestore()
+    const url = window.location.href;
+    const strs = url.split('=');
+    const id = strs.at(-1)
+    const colRef = doc(db, 'blogs', id)
+
+
+    let title = document.getElementById('title')
+    let description = document.getElementById('subtitle')
+    let content = document.getElementById('myTextArea')
+    let update = document.getElementById('updatebtn')
+
+    getDoc(colRef)
+      .then((doc) => {
+
+  
+        title.innerHTML += `<input type="text" id="title" name="title" value= '${doc.data().title}'>`
+        description.innerHTML += '<input type="text" id="desc" name="desc" value= "' + doc.data().description + '">'
+        content.innerHTML += tinyMCE.get('myTextArea').setContent(doc.data().content)
+
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+
+
+
+
+
+    // Updating here
+    const updRef = doc(db, 'blogs', doc.id)
+    document.getElementById('updatebtn').addEventListener('click', function () {
+      console.log(title.value)
+      console.log(description.value)
+      updateDoc(colRef, {
+        title: title,
+        description: desc,
+        content: content
+      })
+        .then(() => {
+          alert('done')
+          // resetting form
+        })
+    })
+
+  </script>
+
+</body>
+
+</html>

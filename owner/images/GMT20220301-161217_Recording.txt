@@ -1,0 +1,30 @@
+01:02:09	N Armstrong:	"main": "index.js",  "scripts": {    "start": "nodemon index.js"  }
+01:02:26	N Armstrong:	can u try this
+01:12:42	UN RUDASINGWA:	I just wanted to ask how does the work from other computers appears on your dashboard
+01:14:13	UN RUDASINGWA:	yes
+01:34:41	BenIraa:	Anyone can share with me The code in package.json 
+01:37:40	UN R.:	Do you mean something like this:
+01:37:45	UN R.:	"name": "UNTEST",
+  "version": "1.0.0",
+  "description": "testAPI",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev":"nodemon index.js"
+  },
+  "author": "UN author",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
+  }
+}
+01:38:00	BenIraa:	yes
+01:38:26	UN R.:	Then type: npm install -y
+01:51:16	Issa NSABIMANA:	https://education.github.com/pack
+02:33:05	Thierry_Twahirwa:	great thing
+02:39:29	NDACYAYISENGA Fabrice:	I want to ak about folder arrangement like those schema
+02:39:34	NDACYAYISENGA Fabrice:	to ask
+02:45:52	BenIraa:	Invite me on that Repo Cause natakaye pe!!! 

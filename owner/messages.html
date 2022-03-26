@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Admin Panel</title>
+</head>
+
+<body>
+    <div class="side-menu">
+        <div class="brand-name">
+           <h1>JO KHN</h1>
+        </div>
+        <ul>
+            <li><img src="images/home.png" alt="">&nbsp; <span> <a href="home.html" >Home</a> </span> </li>
+            <li><img src="images/message.png" alt="">&nbsp; <span> <a href="messages.html" class="active">Inbox</a> </span> </li>
+            <li><img src="images/article.jpg" alt="">&nbsp;<span> <a href="articles.html">Articles</a> </span> </li>
+            <li><img src="images/skill.jpg" alt="">&nbsp;<span> <a href="skills.html">Skills</a> </span> </li>
+          <li><img src="images/account.jpg" alt="">&nbsp;<span> <a href="account.html">Account</a> </span> </li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                <div class="search">
+                  
+                </div>
+                <div class="user">
+                 <div class="notify">
+                    <img  src="notifications.png" alt="">
+                 </div>
+                
+                    <div class="img-case">
+                        <img src="images/logo.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+          
+             <div class="content-2">
+                <div class="recent-messages">
+                    <div class="title">
+                        <h2>Contact Messages</h2>
+                    </div>
+                    <table id='loopmessage'>
+                        <tr class="cols">
+                            <th></th>
+                            <th>Names</th>
+                            <th>Email</th>
+                            <th>Subject</th>
+                            <th colspan="15">Action</th>
+                        </tr>
+                        <tr>
+                            <td> 
+                                <input class="checker" type="checkbox" id="checkboxed"> </td>
+                            <td>KAHINDO Joel</td>
+                            <td>khnjoel7@gmail.com</td>
+                            <td>lorem ipsumlorem ipsum lorem ipsumlorem ipsum...</td>
+                           
+                            <td>
+                              <a href="#view-message" class="btn"> <img src='images/eye.png' > </a>
+                              <a onclick="confirm('Sure ?')" class="btn"> <img src='images/delete.png' > </a>
+                              
+                            </td>
+                      
+                        </tr>
+
+                        
+                    </table> <br> 
+                  <a href=""> <button class="btn-action">Delete</button> </a>
+                </div>
+            </div> 
+          
+        </div>
+        <div id="view-message" class="overlay">
+            <div class="modal">
+              <h2>VIEW MESSAGE</h2>
+              <a rel="nofollow" class="close" href="#">×</a>
+              <div class="contents">
+               KAHINDO Joel<br>
+               khnjoel7@yahoo.com
+             
+               <br><br>
+               This is a message part<strong>Hello fab</strong>
+               This is a second message<strong>Hello kwizera</strong>
+               <br><br>
+               Best Regards<br><br>
+                <a rel="nofollow" class="button" href="#">Quick Reply</a>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <script type="module">
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+        // import {
+        //   getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc,
+        // } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
+    
+        // const firebaseConfig = {
+        //   apiKey: "AIzaSyDCtGxTkR4F0vwIwH72Ts5grruRKsqGZ0U",
+        //   authDomain: "devkwizera-c1ddd.firebaseapp.com",
+        //   projectId: "devkwizera-c1ddd",
+        //   storageBucket: "devkwizera-c1ddd.appspot.com",
+        //   messagingSenderId: "987293906553",
+        //   appId: "1:987293906553:web:913e70af4b9aca9a93c6a8"
+        // };
+    
+    
+        // const app = initializeApp(firebaseConfig);
+    
+        // const db = getFirestore()
+    
+        // const colRef = collection(db, 'messages')
+    
+        // getDocs(colRef)
+        //   .then((snapshot) => {
+        //     let messages = []
+    
+        //     snapshot.docs.forEach((doc) => {
+        //       messages.push({ ...doc.data(), id: doc.id })
+        //     })
+    
+    
+        //     let item;
+        //     let messageSection = document.getElementById('loopmessage');
+    
+        //     for (item in messages){
+        //     messageSection.innerHTML+=
+        //       " <tr>  <td> "+
+        //         " <input class='checker' type='checkbox' id='checkboxed'> </td>"+
+        //         " <td>"+messages[item].name+"</td>"+
+        //         " <td>"+messages[item].email+"</td>"+
+        //         " <td>"+messages[item].subject+"</td>"+
+           
+        //         " <td><a href='#view-message' class='btn'><img src='images/eye.png' ></a> <a href='#deleteMe' class='btn'><img src='images/delete.png' ></a></td>"+
+        //         "</tr>";
+              
+    
+        //     }
+    
+        //   })
+        //   .catch(err => {
+        //     console.log(err.message)
+        //   })
+    
+      </script>
+</body>
+
+</html>

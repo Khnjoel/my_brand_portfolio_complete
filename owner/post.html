@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.10.3/tinymce.min.js"
+    integrity="sha512-ykwx/3dGct2v2AKqqaDCHLt1QFVzdcpad7P5LfgpqY8PJCRqAqOeD4Bj63TKnSQy4Yok/6QiCHiSV/kPdxB7AQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <title>Admin Panel</title>
+</head>
+
+<body>
+  <div class="side-menu">
+    <div class="brand-name">
+      <h1>JO KHN</h1>
+    </div>
+    <ul>
+      <li><img src="images/home.png" alt="">&nbsp; <span> <a href="home.html">Home</a> </span> </li>
+      <li><img src="images/message.png" alt="">&nbsp; <span> <a href="messages.html">Inbox</a> </span> </li>
+      <li><img src="images/article.jpg" alt="">&nbsp;<span> <a href="articles.html" class="active">Articles</a> </span>
+      </li>
+      <li><img src="images/skill.jpg" alt="">&nbsp;<span> <a href="skills.html">Skills</a> </span> </li>
+      <li><img src="images/account.jpg" alt="">&nbsp;<span> <a href="account.html">Account</a> </span> </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="header">
+      <div class="nav">
+        <div class="search">
+
+        </div>
+        <div class="user">
+          <div class="notify">
+            <img src="notifications.png" alt="">
+          </div>
+
+          <div class="img-case">
+            <img src="images/logo.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+
+      <div class="blog-data">
+        <form id="blogs">
+
+          <h2>ARTICLE</h2>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="title">Blog Title</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="title" name="title" placeholder="Your article title..">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="title">Short description</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="descriptions" name="title" placeholder="Short description..">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="subject">Content</label>
+            </div>
+            <div class="col-75">
+              <section class="mysect">
+                <textarea id="myTextArea" class="mceEditor"></textarea>
+                </textarea>
+              </section>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <button id="postbtn" type="buttonfx">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyDCtGxTkR4F0vwIwH72Ts5grruRKsqGZ0U",
+          authDomain: "devkwizera-c1ddd.firebaseapp.com",
+          projectId: "devkwizera-c1ddd",
+          storageBucket: "devkwizera-c1ddd.appspot.com",
+          messagingSenderId: "987293906553",
+          appId: "1:987293906553:web:913e70af4b9aca9a93c6a8"
+        };
+
+
+        const app = initializeApp(firebaseConfig);
+
+        import {
+          getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc,
+        } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
+
+        const db = getFirestore();
+        tinyMCE.init({
+          mode: "specific_textareas",
+          editor_selector: "mceEditor"
+        });
+        let title = document.getElementById('title');
+        let description = document.getElementById('descriptions');
+        let save = document.getElementById('postbtn');
+
+        async function AddDocument_AutoID() {
+
+          var ref = collection(db, "blogs");
+
+          const docRef = await addDoc(
+            ref, {
+            title: title.value,
+            description: description.value,
+            content: tinyMCE.get('myTextArea').getContent()
+          }
+
+          )
+            .then(() => {
+              alert('blog created');
+              window.location='articles.html';
+            })
+            .catch((error) => {
+              alert('Unsuccessful operation : ' + error);
+            })
+        };
+
+        save.addEventListener("click", AddDocument_AutoID);
+
+
+
+
+
+
+
+      </script>
+
+
+    </div>
+  </div>
+
+
+  <script src="../js/tinymce.js"> </script>
+
+</body>
+
+</html>

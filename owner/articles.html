@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Admin Panel</title>
+</head>
+
+<body>
+  <div class="side-menu">
+    <div class="brand-nase">
+      <h1>JO KHN</h1>
+    </div>
+    <ul>
+      <li><img src="images/home.png" alt="">&nbsp; <span> <a href="home.html">Home</a> </span> </li>
+      <li><img src="images/message.png" alt="">&nbsp; <span> <a href="messages.html">Inbox</a> </span> </li>
+      <li><img src="images/article.jpg" alt="">&nbsp;<span> <a href="articles.html" class="active">Articles</a> </span>
+      </li>
+      <li><img src="images/skill.jpg" alt="">&nbsp;<span> <a href="skills.html">Skills</a> </span> </li>
+      <li><img src="images/account.jpg" alt="">&nbsp;<span> <a href="account.html">Account</a> </span> </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="header">
+      <div class="nav">
+        <div class="search">
+
+        </div>
+        <div class="user">
+          <div class="notify">
+            <img src="notifications.png" alt="">
+          </div>
+
+          <div class="img-case">
+            <img src="images/logo.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="">
+        <div class="buttonadd buttonx" onclick="window.location='post.html'">+</div>
+        <main class="grid" id="posts">
+          <!-- <article>
+            <img src="../images/blog1.png" alt="Sample photo">
+            <div class="text">
+              <h3>Blog title goes here</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.</p>
+              <a href="edit-post.html"> <img src="images/edit.png" alt=""> </a> &nbsp;&nbsp; <a href=""><img
+                  src="images/delete.png" alt=""></a>
+            </div>
+          </article> -->
+
+
+
+        </main>
+      </div>
+    </div>
+    
+   
+
+  </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+    import {
+      getFirestore, collection, getDocs, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc,
+    } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDCtGxTkR4F0vwIwH72Ts5grruRKsqGZ0U",
+      authDomain: "devkwizera-c1ddd.firebaseapp.com",
+      projectId: "devkwizera-c1ddd",
+      storageBucket: "devkwizera-c1ddd.appspot.com",
+      messagingSenderId: "987293906553",
+      appId: "1:987293906553:web:913e70af4b9aca9a93c6a8"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+
+    const db = getFirestore()
+
+    const colRef = collection(db, 'blogs')
+
+    getDocs(colRef)
+      .then((snapshot) => {
+        let blogs = []
+
+        snapshot.docs.forEach((doc) => {
+          blogs.push({ ...doc.data(), id: doc.id })
+        })
+
+
+        let item;
+        let blogSection = document.getElementById('posts');
+
+        for (item in blogs){
+          blogSection.innerHTML+=
+          " <article>"+
+            "<img src='../images/blog1.png'>"+
+            "<h3>"+blogs[item].title+"</h3>"+
+            " <p>"+blogs[item].description.substr(0, 70)+"...</p>"+
+            " <a href='edit-post.html?id="+blogs[item].id+" '>"+
+            "<img src='images/edit.png'> &nbsp;&nbsp;"+
+            " <a href='#'>"+
+            "<img src='images/delete.png'>";
+
+        }
+
+        // console.log(blogs[0].title)
+
+        
+
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
+
+  </script>
+</body>
+
+</html>
